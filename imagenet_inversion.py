@@ -22,7 +22,7 @@ import torch.utils.data
 from torchvision import datasets, transforms
 
 import numpy as np
-from apex import amp
+# from apex import amp
 import os
 import torchvision.models as models
 from utils.utils import load_model_pytorch, distributed_is_initialized
@@ -69,8 +69,8 @@ def run(args):
     net = net.to(device)
 
     use_fp16 = args.fp16
-    if use_fp16:
-        net, _ = amp.initialize(net, [], opt_level="O2")
+    # if use_fp16:
+    #     net, _ = amp.initialize(net, [], opt_level="O2")
 
     print('==> Resuming from checkpoint..')
 
@@ -110,8 +110,8 @@ def run(args):
         net_verifier = models.__dict__[student_arch](pretrained=True).to(device)
         net_verifier.eval()
 
-        if use_fp16:
-            net_verifier, _ = amp.initialize(net_verifier, [], opt_level="O2")
+        # if use_fp16:
+        #     net_verifier, _ = amp.initialize(net_verifier, [], opt_level="O2")
 
         net_verifier = net_verifier.to(device)
         net_verifier.train()
