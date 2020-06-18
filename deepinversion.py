@@ -200,8 +200,7 @@ class DeepInversionClass(object):
         for module in self.net_teacher.modules():
             if isinstance(module, nn.BatchNorm2d):
                 self.loss_r_feature_layers.append(DeepInversionFeatureHook(module))
-        import pdb
-        pdb.set_trace()
+        self.loss_vs = VisualizationHook(self.net_teacher.avgpool)
 
         self.hook_for_display = None
         if hook_for_display is not None:
