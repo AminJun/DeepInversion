@@ -198,6 +198,7 @@ class DeepInversionClass(object):
                 targets = [1, 933, 946, 980, 25, 63, 92, 94, 107, 985, 151, 154, 207, 250, 270, 277, 283, 292, 294, 309,
                            311, 325, 340, 360, 386, 402, 403, 409, 530, 440, 468, 417, 590, 670, 817, 762, 920, 949,
                            963, 967, 574, 487]
+                targets = targets[:10]
 
                 targets = torch.LongTensor(targets * (int(self.bs / len(targets)))).to('cuda')
 
@@ -288,6 +289,7 @@ class DeepInversionClass(object):
 
                 # R_ADI
                 loss_verifier_cig = torch.zeros(1)
+                """
                 if self.adi_scale != 0.0:
                     if self.detach_student:
                         outputs_student = net_student(inputs_jit).detach()
@@ -314,7 +316,7 @@ class DeepInversionClass(object):
                     if local_rank == 0:
                         if iteration % save_every == 0:
                             print('loss_verifier_cig', loss_verifier_cig.item())
-
+                """
                 # l2 loss on images
                 loss_l2 = torch.norm(inputs_jit.view(self.bs, -1), dim=1).mean()
 
